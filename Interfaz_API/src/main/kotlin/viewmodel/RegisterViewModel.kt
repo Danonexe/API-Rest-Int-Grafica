@@ -16,7 +16,6 @@ class RegisterViewModel {
     val registrationState: StateFlow<RegistrationState> = _registrationState.asStateFlow()
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
-    // Añade esta función nueva
     private fun processErrorMessage(message: String): String {
         return message.replace("BadRequestException:", "")
             .trim()

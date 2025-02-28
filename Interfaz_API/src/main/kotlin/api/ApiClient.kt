@@ -9,11 +9,11 @@ import io.ktor.serialization.gson.*
 import io.ktor.client.statement.bodyAsText
 import model.Register
 import model.ErrorResponse
-import com.google.gson.Gson  // Añade este import
+import com.google.gson.Gson
 
 object ApiClient {
     private const val BASE_URL = "http://localhost:8080"
-    private val gson = Gson()  // Añade esta línea
+    private val gson = Gson()
 
     val client = HttpClient(CIO) {
         install(ContentNegotiation) {

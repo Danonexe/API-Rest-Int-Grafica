@@ -3,6 +3,7 @@ package com.es.aplicacion.service
 import com.es.aplicacion.dto.UsuarioDTO
 import com.es.aplicacion.dto.UsuarioRegisterDTO
 import com.es.aplicacion.error.exception.BadRequestException
+import com.es.aplicacion.error.exception.ConflictException
 import com.es.aplicacion.error.exception.UnauthorizedException
 import com.es.aplicacion.model.Usuario
 import com.es.aplicacion.repository.UsuarioRepository
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
@@ -28,7 +30,8 @@ class UsuarioService : UserDetailsService {
         var usuario: Usuario = usuarioRepository
             .findByUsername(username!!)
             .orElseThrow {
-                UnauthorizedException("$username no existente")
+                // Es mejor usar UsernameNotFoundException aquí para cumplir con la interfaz UserDetailsService
+                UsernameNotFoundException("$username no existente")
             }
 
         return User.builder()
@@ -49,9 +52,10 @@ class UsuarioService : UserDetailsService {
             throw BadRequestException("Uno o más campos vacíos")
         }
 
-        // Fran ha comprobado que el usuario existe previamente
+        // Comprobar que el usuario existe previamente
         if(usuarioRepository.findByUsername(usuarioInsertadoDTO.username).isPresent) {
-            throw Exception("Usuario ${usuarioInsertadoDTO.username} ya está registrado")
+            // Mejor usar una excepción específica para conflictos en lugar de Exception genérica
+            throw ConflictException("Usuario ${usuarioInsertadoDTO.username} ya está registrado")
         }
 
         // comprobar que ambas passwords sean iguales
@@ -95,7 +99,7 @@ class UsuarioService : UserDetailsService {
 
         // Insertar el user (convierto a Entity)
         val usuario = Usuario(
-             null,
+            null,
             usuarioInsertadoDTO.username,
             passwordEncoder.encode(usuarioInsertadoDTO.password),
             usuarioInsertadoDTO.rol,
@@ -110,6 +114,5 @@ class UsuarioService : UserDetailsService {
             usuario.username,
             usuario.roles
         )
-
     }
 }
