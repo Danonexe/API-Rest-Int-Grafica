@@ -3,6 +3,13 @@
 ## Descripción General
 Este proyecto implementa una API REST para gestionar tareas personales con autenticación mediante JWT. Permite a los usuarios registrarse, iniciar sesión, y administrar tareas (crear, visualizar, marcar como completadas y eliminar). El sistema distingue entre usuarios regulares (USER) y administradores (ADMIN), con diferentes niveles de acceso a la funcionalidad.
 
+## Análisis de utilizar programación orientada a componentes y una base de datos no relacional
+Ventajas de POC: Reutilización de código, modularidad, escalabilidad y mejor mantenimiento.
+Inconvenientes de POC: Mayor complejidad inicial, posible sobrecarga y curva de aprendizaje.
+
+Ventajas de MongoDB: Esquema flexible, escalabilidad, rapidez en grandes volúmenes de datos y manejo de datos semiestructurados.
+Inconvenientes de MongoDB: Menor consistencia, mayor consumo de almacenamiento, ineficiente en relaciones complejas y mayor carga en el backend.
+
 ## Estructura de la Base de Datos
 
 ### Colección: Usuarios

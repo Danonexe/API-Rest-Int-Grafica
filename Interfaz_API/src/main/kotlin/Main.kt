@@ -14,6 +14,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import ui.CompletarTarea
+import ui.CreateTarea
+import ui.EliminarTarea
+import ui.getTareas
+
 
 
 @Composable
@@ -28,7 +33,7 @@ fun App() {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                Text("Inicio de Sesión", fontSize = 32.sp)
+                Text("Inicia Sesión para entrar a las tareas", fontSize = 32.sp)
                 Spacer(modifier = Modifier.height(40.dp))
 
                 Button(onClick = { println("Iniciar sesión") }) {
